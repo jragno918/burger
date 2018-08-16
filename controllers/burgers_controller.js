@@ -1,6 +1,26 @@
 var express = require("express");
 
-var router = express.Router();
+var controller = function(app) {
+  app.get("/", function(req, res) {
+      burger.all(function(data) {
+        res.render("index", {burgers: data
+        });
+      });
+  });
 
-// Import the model (burger.js) to use its database functions.
-var cat = require("../models/burger.js");
+  app.post("/", function(req, res) {
+    burger.new("burger_name", req.body.burger, function(data) {
+        res.redirect("/");
+        console.log(req.body.burger);
+      });
+  });
+
+  app.put("/", function(req.res) {
+    burger.devour("devoured", 1, "id", req.body.id, function(data) {
+      res.redirect("/");
+    });
+  });
+
+};
+
+module.exports = controller;
